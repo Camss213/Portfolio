@@ -22,7 +22,7 @@ export default function Portfolio() {
 
     const icoGeometry = new THREE.IcosahedronGeometry(0.6, 1);
     const icoEdges = new THREE.EdgesGeometry(icoGeometry);
-    const icoLine = new THREE.LineSegments(icoEdges, new THREE.LineBasicMaterial({ 
+    const icoLine = new THREE.LineSegments(icoEdges, new THREE.LineBasicMaterial({
       color: 0x2563eb,
       transparent: true,
       opacity: 0.9
@@ -58,29 +58,30 @@ export default function Portfolio() {
   const projets = [
     {
       id: 1,
-      titre: "Application Mobile Spirituelle",
+      titre: "Application Mobile Siraj",
       type: "Développement Mobile",
       annee: "2024",
-      tech: ["Android Studio", "Java", "Gradle", "Firebase", "SQLite"],
-      description: "Application Android native dédiée au bien-être spirituel avec fonctionnalités de méditation et suivi personnel.",
+      tech: ["Android Studio", "Java", "Gradle", "JSON", "XML"],
+      description: "Application Android native dédiée à la lecture, la méditation et l'apprentissage avec une IA intégrée.",
       contexte: "Projet personnel - Développement mobile natif",
-      details: "Développement complet d'une application mobile native Android avec Android Studio. Architecture MVVM, gestion du cycle de vie Android, notifications push via Firebase Cloud Messaging, stockage local avec SQLite et interface Material Design.",
-      competences: ["Architecture Android", "Java", "Firebase", "Material Design", "Optimisation performance"],
+      details: "Développement complet d'une application mobile native Android avec Android Studio. Architecture MVVM, gestion du cycle de vie Android, stockage local avec fichiers JSON et interface Material Design.",
+      competences: ["Architecture Android", "Java", "JSON", "Material Design", "Optimisation performance"],
       impact: "Application native performante avec mode offline complet",
       github: "https://github.com/Camss213/SirajApp"
     },
     {
       id: 2,
-      titre: "Plateforme de Devis - Garage Automobile",
+      titre: "Plateforme de Facturation - Garage Automobile",
       type: "Développement Web",
       annee: "2024",
-      tech: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "DOM API"],
-      description: "Site web de génération automatique de devis pour un garage automobile avec interface responsive.",
+      tech: ["HTML5", "CSS3", "JavaScript"],
+      description: "Site web de génération automatique de factures pour un garage automobile avec interface responsive.",
       contexte: "Projet client professionnel",
-      details: "Développement web front-end en JavaScript vanilla avec manipulation avancée du DOM. Système de calcul dynamique des devis, validation des formulaires côté client, génération de PDF pour impression.",
-      competences: ["JavaScript ES6+", "DOM Manipulation", "Responsive Design", "UX/UI"],
-      impact: "Automatisation complète du processus de devis, gain de temps de 70%",
-      github: "#"
+      details: "Développement web front-end en JavaScript. Système de calcul dynamique des factures, validation des formulaires côté client, génération de PDF pour impression.",
+      competences: ["JavaScript", "Responsive Design", "UX/UI"],
+      impact: "Automatisation complète du processus de génération de facture, gain de temps de 90%",
+      github: "https://github.com/Camss213/Routedupneu",
+      site: "https://routedupneu.netlify.app/"
     },
     {
       id: 3,
@@ -101,8 +102,8 @@ export default function Portfolio() {
       type: "E-Commerce",
       annee: "2023-2024",
       tech: ["Symfony", "PHP", "Doctrine ORM", "RailwayDB", "Twig"],
-      description: "Plateforme de réservation en ligne pour location de voitures particulières et de luxe.",
-      contexte: "Projet académique - Framework PHP",
+      description: "Plateforme de réservation en ligne pour location de voitures entre particuliers.",
+      contexte: "Projet personnel - Framework PHP",
       details: "Développement avec le framework Symfony suivant l'architecture MVC. Utilisation de Doctrine ORM pour la gestion de la base de données RailwayDB, templates Twig pour le rendu.",
       competences: ["Framework Symfony", "ORM Doctrine", "MVC Pattern", "Gestion de projet"],
       impact: "Plateforme complète avec réservations en ligne et gestion automatisée",
@@ -110,11 +111,11 @@ export default function Portfolio() {
     },
     {
       id: 5,
-      titre: "E-Commerce Produits Artisanaux",
+      titre: "E-Commerce Les Inspirations d'Oumy",
       type: "Développement Web",
-      annee: "2023",
+      annee: "2024",
       tech: ["PHP", "Docker", "PostgreSQL", "Nginx", "Docker Compose"],
-      description: "Boutique en ligne pour commerçante spécialisée dans les produits fait main.",
+      description: "Boutique en ligne pour une commerçante spécialisée dans les produits fait main.",
       contexte: "Projet client professionnel",
       details: "Site e-commerce développé en PHP avec architecture containerisée. Configuration Docker multi-conteneurs : Nginx comme reverse proxy, PHP-FPM pour l'exécution et PostgreSQL pour la base de données.",
       competences: ["Architecture Docker", "DevOps", "Multi-conteneurs", "Configuration serveur"],
@@ -132,19 +133,18 @@ export default function Portfolio() {
       details: "Application développée avec Visual Studio et le framework .NET. Interface graphique WPF, implémentation de protocoles réseau avec sockets TCP/IP, gestion du multi-threading.",
       competences: ["Framework .NET", "Programmation réseau", "Multi-threading", "Interface WPF"],
       impact: "Communication client-serveur stable avec gestion multi-clients",
-      github: "#"
     },
     {
       id: 7,
       titre: "Intermarché - Gestion Logistique",
       type: "Application Professionnelle",
-      annee: "2024",
-      tech: ["React", "Node.js", "PostgreSQL", "WebSocket", "Docker"],
+      annee: "En cours",
+      tech: ["Vue.js", "Node.js + Express", "Three.js", "PostgreSQL", "Docker"],
       description: "Application web pour la gestion et optimisation des préparations de commandes en base logistique.",
-      contexte: "Projet professionnel - Système logistique",
-      details: "Application web temps réel avec stack moderne. Frontend React avec Hooks et Context API, backend Node.js avec Express, WebSockets pour les mises à jour en temps réel.",
-      competences: ["React Hooks", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
-      impact: "Optimisation de 40% du processus de préparation, réduction des erreurs",
+      contexte: "Projet académique professionnel - Système logistique",
+      details: "Application web temps réel avec stack moderne. Frontend Vue.js avec Composition API, backend Node.js avec Express, WebSockets pour les mises à jour en temps réel.",
+      competences: ["Vue.js Composition API", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
+      impact: "Optimisation de 48% du processus de préparation, réduction des erreurs",
       github: "#"
     }
   ];
@@ -166,8 +166,8 @@ export default function Portfolio() {
         .glow-effect { box-shadow: 0 0 30px rgba(37, 99, 235, 0.15); }
       `}</style>
 
-      <canvas 
-        ref={canvasRef} 
+      <canvas
+        ref={canvasRef}
         className="fixed inset-0 pointer-events-auto z-0 cursor-grab active:cursor-grabbing"
         onMouseDown={(e) => {
           setIsDragging(true);
@@ -215,7 +215,7 @@ export default function Portfolio() {
                 Spécialisée en développement web et mobile avec une expertise en architecture full-stack,
                 du développement Android natif aux applications web modernes.
               </p>
-              
+
               <div className="flex flex-wrap gap-6 mb-12">
                 <div className="flex items-center gap-2 text-gray-600">
                   <MapPin size={18} />
@@ -334,8 +334,8 @@ export default function Portfolio() {
                   Icon: Code2
                 }
               ].map((categorie, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="glassmorphism rounded-2xl p-6 card-hover group"
                   style={{
                     animation: `scaleIn 0.5s ease-out ${i * 0.1}s forwards`,
@@ -370,7 +370,7 @@ export default function Portfolio() {
             <p className="text-lg text-gray-600 mb-12">
               Intéressé par mon profil ? N'hésitez pas à me contacter pour discuter d'opportunités.
             </p>
-            
+
             <div className="glassmorphism rounded-3xl p-10 card-hover glow-effect">
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="text-left p-6 bg-white/50 rounded-2xl hover:bg-white/80 transition-all duration-300">
@@ -483,10 +483,16 @@ export default function Portfolio() {
             </div>
 
             <div className="mt-8 pt-8 border-t border-gray-200">
-              <a href={selectedProject.github} className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect">
-                <Github size={24} />
-                Voir le code source
-              </a>
+              <div className="grid grid-cols-2 gap-4">
+                <a href={selectedProject.github} className="py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect">
+                  <Github size={24} />
+                  Code source
+                </a>
+                <a href={selectedProject.site} target="_blank" rel="noopener noreferrer" className="py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect">
+                  <ExternalLink size={24} />
+                  Voir le site
+                </a>
+              </div>
             </div>
           </div>
         </div>
