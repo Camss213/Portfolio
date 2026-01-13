@@ -482,18 +482,35 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <div className="grid grid-cols-2 gap-4">
-                <a href={selectedProject.github} className="py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect">
-                  <Github size={24} />
-                  Code source
-                </a>
-                <a href={selectedProject.site} target="_blank" rel="noopener noreferrer" className="py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect">
+           <div className="mt-8 pt-8 border-t border-gray-200">
+            <div className="grid grid-cols-2 gap-4">
+              
+              {/* Bouton GitHub (toujours visible) */}
+              <a
+                href={selectedProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect"
+              >
+                <Github size={24} />
+                Code source
+              </a>
+
+              {/* Bouton Site (uniquement si site existe) */}
+              {selectedProject.site && (
+                <a
+                  href={selectedProject.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect"
+                >
                   <ExternalLink size={24} />
                   Voir le site
                 </a>
-              </div>
+              )}
+
             </div>
+          </div>
           </div>
         </div>
       )}
