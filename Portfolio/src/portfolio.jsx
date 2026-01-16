@@ -2,31 +2,54 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, ChevronRight, Calendar, MapPin, Smartphone, Palette, Settings, Database, Rocket, Code2, FileText, Lightbulb, Target, Zap } from 'lucide-react';
 import * as THREE from 'three';
 
+import dockerLogo from "./assets/logos/docker.png";
+import vscodeLogo from "./assets/logos/vscode.png";
+import figmaLogo from "./assets/logos/figma.png";
+import githubLogo from "./assets/logos/github.png";
+import androidLogo from "./assets/logos/android.png";
+import dbeaverLogo from "./assets/logos/dbeaver.png";
+import trelloLogo from "./assets/logos/trello.png";
+
+
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
+
+  const [isDark, setIsDark] = useState(false);
+
   const canvasRef = useRef(null);
   const logoCanvasRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [rotation, setRotation] = useState({ x: 0.2, y: 0 });
   const [previousMouse, setPreviousMouse] = useState({ x: 0, y: 0 });
 
-  // Logo icosaèdre
+  // ======================
+  // LOGO ICOSAÈDRE (THREE.JS)
+  // ======================
   useEffect(() => {
     if (!logoCanvasRef.current) return;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: logoCanvasRef.current, alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      canvas: logoCanvasRef.current,
+      alpha: true,
+      antialias: true
+    });
+
     renderer.setSize(80, 80);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     camera.position.z = 2;
 
     const icoGeometry = new THREE.IcosahedronGeometry(0.6, 1);
     const icoEdges = new THREE.EdgesGeometry(icoGeometry);
-    const icoLine = new THREE.LineSegments(icoEdges, new THREE.LineBasicMaterial({
-      color: 0x2563eb,
-      transparent: true,
-      opacity: 0.9
-    }));
+    const icoLine = new THREE.LineSegments(
+      icoEdges,
+      new THREE.LineBasicMaterial({
+        color: 0x2563eb,
+        transparent: true,
+        opacity: 0.9
+      })
+    );
     scene.add(icoLine);
 
     const particlesGeometry = new THREE.BufferGeometry();
@@ -34,15 +57,26 @@ export default function Portfolio() {
     for (let i = 0; i < 90; i++) {
       particlePositions[i] = (Math.random() - 0.5) * 2;
     }
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-    const particlesMaterial = new THREE.PointsMaterial({ color: 0x6366f1, size: 0.03, transparent: true, opacity: 0.7 });
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    particlesGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(particlePositions, 3)
+    );
+
+    const particlesMaterial = new THREE.PointsMaterial({
+      color: 0x6366f1,
+      size: 0.03,
+      transparent: true,
+      opacity: 0.7
+    });
+
+    const particles = new THREE.Points(
+      particlesGeometry,
+      particlesMaterial
+    );
     scene.add(particles);
 
-    let time = 0;
     const animate = () => {
       requestAnimationFrame(animate);
-      time += 0.01;
       icoLine.rotation.x += 0.008;
       icoLine.rotation.y += 0.012;
       particles.rotation.y += 0.003;
@@ -54,6 +88,9 @@ export default function Portfolio() {
       renderer.dispose();
     };
   }, []);
+
+
+
 
   const projets = [
     {
@@ -94,7 +131,7 @@ export default function Portfolio() {
       details: "Application enterprise avec architecture moderne : frontend Angular avec TypeScript et RxJS, backend Spring Boot avec API RESTful, base de données PostgreSQL. Authentification JWT, gestion des rôles.",
       competences: ["Architecture MVC", "API REST", "Sécurité JWT", "Base de données relationnelle", "Tests"],
       impact: "Traçabilité complète des incidents, reporting automatisé et analyse statistique",
-      github: "#"
+      github: "https://github.com/Camss213/CTVR.git"
     },
     {
       id: 4,
@@ -127,7 +164,7 @@ export default function Portfolio() {
       titre: "Architecture Client-Serveur avec VM",
       type: "Systèmes Distribués",
       annee: "2023",
-      tech: ["Visual Studio", "C#", ".NET Framework", "WPF", "Sockets TCP/IP"],
+      tech: ["Oracle Virtual Box", "Bash", "Sockets TCP/IP"],
       description: "Implémentation d'une architecture client-serveur avec gestion de machines virtuelles.",
       contexte: "Projet académique - Programmation système",
       details: "Application développée avec Visual Studio et le framework .NET. Interface graphique WPF, implémentation de protocoles réseau avec sockets TCP/IP, gestion du multi-threading.",
@@ -149,8 +186,27 @@ export default function Portfolio() {
     }
   ];
 
+
+  const logiciels = [
+  { name: "Android Studio", logo: androidLogo },
+  { name: "VS Code", logo: vscodeLogo },
+  { name: "Docker", logo: dockerLogo },
+  { name: "GitHub", logo: githubLogo },
+  { name: "Figma", logo: figmaLogo },
+  { name: "DBeaver", logo: dbeaverLogo },
+  { name: "Trello", logo: trelloLogo }
+];
+
+
   return (
-    <div className="min-h-screen bg-white">
+    <div
+  className="
+    min-h-screen
+    bg-white dark:bg-[#0B0F19]
+    text-gray-900 dark:text-gray-100
+    transition-colors duration-700 ease-in-out
+  "
+>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         * { font-family: 'Inter', sans-serif; }
@@ -164,7 +220,42 @@ export default function Portfolio() {
         .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-hover:hover { transform: translateY(-8px); }
         .glow-effect { box-shadow: 0 0 30px rgba(37, 99, 235, 0.15); }
-      `}</style>
+       @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      @keyframes logoEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes logoFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+`}</style>
+
+      
 
       <canvas
         ref={canvasRef}
@@ -191,12 +282,15 @@ export default function Portfolio() {
               <canvas ref={logoCanvasRef} className="w-20 h-20" />
               <h1 className="text-xl font-semibold gradient-text">Camelia Difi</h1>
             </div>
+
+  
             <nav className="flex gap-8 text-sm font-medium">
               <a href="#projets" className="text-gray-600 hover:text-blue-600 transition-all duration-300 hover:scale-110">Projets</a>
               <a href="#competences" className="text-gray-600 hover:text-blue-600 transition-all duration-300 hover:scale-110">Compétences</a>
               <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-all duration-300 hover:scale-110">Contact</a>
             </nav>
           </div>
+        
         </header>
 
         <section className="pt-32 pb-20 px-6">
@@ -359,6 +453,66 @@ export default function Portfolio() {
               ))}
             </div>
           </div>
+          {/* Logiciels & Outils */}
+
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-10">
+  {logiciels.map((tool, i) => (
+    <div
+      key={tool.name}
+      className="
+        relative
+        flex flex-col items-center justify-center
+        p-5 rounded-2xl
+        bg-white/70 dark:bg-white/5
+        backdrop-blur-md
+        cursor-pointer
+        transition-all duration-500
+        hover:-translate-y-3 hover:rotate-1
+        hover:shadow-2xl
+      "
+      style={{
+        animation: `
+          logoEnter 0.6s ease-out forwards,
+          logoFloat 4s ease-in-out infinite
+        `,
+        animationDelay: `${i * 100}ms`,
+        opacity: 0
+      }}
+    >
+      {/* Glow */}
+      <div
+        className="
+          absolute inset-0 rounded-2xl
+          opacity-0 hover:opacity-100
+          transition-opacity duration-500
+          bg-gradient-to-br from-blue-500/20 to-purple-500/20
+          blur-xl
+        "
+      />
+
+      {/* Logo */}
+      <img
+        src={tool.logo}
+        alt={tool.name}
+        className="
+          w-14 h-14 object-contain mb-3
+          relative z-10
+          transition-transform duration-500
+          hover:scale-110
+        "
+        draggable={false}
+      />
+
+      {/* Nom */}
+      <span className="relative z-10 text-sm font-semibold text-gray-700 dark:text-gray-300">
+        {tool.name}
+      </span>
+    </div>
+  ))}
+</div>
+
+
         </section>
 
         {/* Section Contact */}
@@ -410,110 +564,174 @@ export default function Portfolio() {
           </div>
         </footer>
       </div>
-
-      {/* Modal détaillée */}
-      {selectedProject && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-6" onClick={() => setSelectedProject(null)} style={{ animation: 'fadeIn 0.3s ease-out' }}>
-          <div className="glassmorphism rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-10 shadow-2xl" onClick={e => e.stopPropagation()} style={{ animation: 'scaleIn 0.4s ease-out' }}>
-            <div className="mb-8">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h3 className="text-4xl font-bold gradient-text mb-3">{selectedProject.titre}</h3>
-                  <p className="text-blue-600 font-semibold text-lg">{selectedProject.type} • {selectedProject.annee}</p>
-                </div>
-                <button onClick={() => setSelectedProject(null)} className="px-4 py-2 glassmorphism text-gray-600 hover:text-gray-900 font-semibold rounded-xl hover:scale-110 transition-all duration-300">
-                  ✕
-                </button>
-              </div>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">{selectedProject.description}</p>
-            </div>
-
-            <div className="space-y-6">
-              <div className="p-6 bg-white/50 rounded-2xl">
-                <h4 className="font-semibold text-gray-900 mb-3 text-lg flex items-center gap-2">
-                  <FileText size={20} className="text-blue-600" />
-                  Contexte du projet
-                </h4>
-                <p className="text-gray-700 leading-relaxed">{selectedProject.contexte}</p>
-              </div>
-
-              <div className="p-6 bg-white/50 rounded-2xl">
-                <h4 className="font-semibold text-gray-900 mb-3 text-lg flex items-center gap-2">
-                  <Lightbulb size={20} className="text-blue-600" />
-                  Description détaillée
-                </h4>
-                <p className="text-gray-700 leading-relaxed">{selectedProject.details}</p>
-              </div>
-
-              <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-100">
-                <h4 className="font-semibold text-gray-900 mb-3 text-lg flex items-center gap-2">
-                  <Target size={20} className="text-blue-600" />
-                  Impact & Résultats
-                </h4>
-                <p className="text-gray-700 font-medium leading-relaxed">{selectedProject.impact}</p>
-              </div>
-
-              <div className="p-6 bg-white/50 rounded-2xl">
-                <h4 className="font-semibold text-gray-900 mb-4 text-lg flex items-center gap-2">
-                  <Zap size={20} className="text-blue-600" />
-                  Compétences développées
-                </h4>
-                <div className="flex flex-wrap gap-3">
-                  {selectedProject.competences.map(comp => (
-                    <span key={comp} className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-gray-800 rounded-xl font-semibold hover:scale-105 transition-transform duration-200">
-                      {comp}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-6 bg-white/50 rounded-2xl">
-                <h4 className="font-semibold text-gray-900 mb-4 text-lg flex items-center gap-2">
-                  <Settings size={20} className="text-blue-600" />
-                  Technologies utilisées
-                </h4>
-                <div className="flex flex-wrap gap-3">
-                  {selectedProject.tech.map(tech => (
-                    <span key={tech} className="px-4 py-2 bg-white text-blue-700 rounded-xl font-semibold shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-           <div className="mt-8 pt-8 border-t border-gray-200">
-            <div className="grid grid-cols-2 gap-4">
-              
-              {/* Bouton GitHub (toujours visible) */}
-              <a
-                href={selectedProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect"
-              >
-                <Github size={24} />
-                Code source
-              </a>
-
-              {/* Bouton Site (uniquement si site existe) */}
-              {selectedProject.site && (
-                <a
-                  href={selectedProject.site}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 text-lg glow-effect"
-                >
-                  <ExternalLink size={24} />
-                  Voir le site
-                </a>
-              )}
-
-            </div>
+{/* Modal détaillée */}
+{selectedProject && (
+  <div
+    className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-6"
+    onClick={() => setSelectedProject(null)}
+    style={{ animation: 'fadeIn 0.3s ease-out' }}
+  >
+    <div
+      onClick={e => e.stopPropagation()}
+      style={{ animation: 'scaleIn 0.4s ease-out' }}
+      className="
+        rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-10 shadow-2xl
+        bg-[#F8FAFC] border border-gray-200
+      "
+    >
+      {/* Header */}
+      <div className="mb-10">
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <h3 className="text-4xl font-bold text-[#0F172A] mb-2">
+              {selectedProject.titre}
+            </h3>
+            <p className="text-blue-600 font-semibold text-lg">
+              {selectedProject.type} • {selectedProject.annee}
+            </p>
           </div>
+
+          <button
+            onClick={() => setSelectedProject(null)}
+            className="
+              w-10 h-10 flex items-center justify-center
+              bg-white border border-gray-300 rounded-full
+              text-gray-500 hover:text-gray-900
+              hover:bg-gray-100 transition-all duration-200
+            "
+          >
+            ✕
+          </button>
+        </div>
+
+        <p className="text-lg text-[#475569] leading-relaxed">
+          {selectedProject.description}
+        </p>
+      </div>
+
+      {/* Sections */}
+      <div className="space-y-6">
+        {/* Contexte */}
+        <div className="p-6 bg-white rounded-2xl border border-gray-200 shadow-sm">
+          <h4 className="font-semibold text-[#0F172A] mb-3 text-lg flex items-center gap-2">
+            <FileText size={20} className="text-blue-600" />
+            Contexte du projet
+          </h4>
+          <p className="text-[#475569] leading-relaxed">
+            {selectedProject.contexte}
+          </p>
+        </div>
+
+        {/* Description */}
+        <div className="p-6 bg-white rounded-2xl border border-gray-200 shadow-sm">
+          <h4 className="font-semibold text-[#0F172A] mb-3 text-lg flex items-center gap-2">
+            <Lightbulb size={20} className="text-blue-600" />
+            Description détaillée
+          </h4>
+          <p className="text-[#475569] leading-relaxed">
+            {selectedProject.details}
+          </p>
+        </div>
+
+        {/* Impact */}
+        <div
+          className="
+            p-6 rounded-2xl border border-blue-200 shadow-sm
+            bg-gradient-to-br from-blue-100 via-white to-purple-100
+          "
+        >
+          <h4 className="font-semibold text-[#0F172A] mb-3 text-lg flex items-center gap-2">
+            <Target size={20} className="text-blue-600" />
+            Impact & Résultats
+          </h4>
+          <p className="text-[#334155] font-medium leading-relaxed">
+            {selectedProject.impact}
+          </p>
+        </div>
+
+        {/* Compétences */}
+        <div className="p-6 bg-white rounded-2xl border border-gray-200 shadow-sm">
+          <h4 className="font-semibold text-[#0F172A] mb-4 text-lg flex items-center gap-2">
+            <Zap size={20} className="text-blue-600" />
+            Compétences développées
+          </h4>
+          <div className="flex flex-wrap gap-3">
+            {selectedProject.competences.map(comp => (
+              <span
+                key={comp}
+                className="
+                  px-4 py-2 rounded-xl font-semibold text-sm
+                  bg-gradient-to-r from-blue-100 to-purple-100
+                  text-[#1E293B]
+                "
+              >
+                {comp}
+              </span>
+            ))}
           </div>
         </div>
-      )}
+
+        {/* Technologies */}
+        <div className="p-6 bg-white rounded-2xl border border-gray-200 shadow-sm">
+          <h4 className="font-semibold text-[#0F172A] mb-4 text-lg flex items-center gap-2">
+            <Settings size={20} className="text-blue-600" />
+            Technologies utilisées
+          </h4>
+          <div className="flex flex-wrap gap-3">
+            {selectedProject.tech.map(tech => (
+              <span
+                key={tech}
+                className="
+                  px-4 py-2 bg-gray-100 text-blue-700
+                  rounded-xl font-semibold text-sm
+                "
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div className="mt-10 pt-8 border-t border-gray-200">
+        <div className={`grid gap-4 ${selectedProject.site ? "grid-cols-2" : "grid-cols-1"}`}>
+          <a
+            href={selectedProject.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              py-4 bg-gradient-to-r from-blue-600 to-purple-600
+              text-white rounded-2xl font-semibold text-lg
+              flex items-center justify-center gap-3
+              hover:shadow-xl hover:scale-105 transition-all duration-300
+            "
+          >
+            <Github size={24} />
+            Code source
+          </a>
+
+          {selectedProject.site && (
+            <a
+              href={selectedProject.site}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                py-4 bg-gradient-to-r from-purple-600 to-pink-600
+                text-white rounded-2xl font-semibold text-lg
+                flex items-center justify-center gap-3
+                hover:shadow-xl hover:scale-105 transition-all duration-300
+              "
+            >
+              <ExternalLink size={24} />
+              Voir le site
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }
