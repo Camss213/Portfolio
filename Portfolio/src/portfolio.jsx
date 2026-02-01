@@ -9,6 +9,7 @@ import githubLogo from "./assets/logos/github.png";
 import androidLogo from "./assets/logos/android.png";
 import dbeaverLogo from "./assets/logos/dbeaver.png";
 import trelloLogo from "./assets/logos/trello.png";
+import godotLogo from "./assets/logos/godot.png";
 
 
 export default function Portfolio() {
@@ -190,6 +191,7 @@ export default function Portfolio() {
   const logiciels = [
   { name: "Android Studio", logo: androidLogo },
   { name: "VS Code", logo: vscodeLogo },
+  { name: "Godot", logo: godotLogo },
   { name: "Docker", logo: dockerLogo },
   { name: "GitHub", logo: githubLogo },
   { name: "Figma", logo: figmaLogo },
@@ -325,10 +327,17 @@ export default function Portfolio() {
                 <a href="#contact" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-medium glow-effect">
                   Me contacter
                 </a>
-                <a href="#" className="px-8 py-4 glassmorphism text-gray-700 rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium flex items-center gap-2">
-                  Télécharger CV
-                  <ExternalLink size={16} />
-                </a>
+                      <a
+        href="/CV_Camelia_Difi.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        download
+        className="px-8 py-4 glassmorphism text-gray-700 rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium flex items-center gap-2"
+      >
+        Télécharger CV
+        <ExternalLink size={16} />
+      </a>
+
               </div>
             </div>
           </div>
@@ -414,7 +423,7 @@ export default function Portfolio() {
                 },
                 {
                   titre: "Bases de Données",
-                  items: ["PostgreSQL", "MySQL", "SQLite", "Doctrine ORM", "RailwayDB"],
+                  items: ["PostgreSQL", "MySQL", "MongoDB", "Doctrine ORM", "RailwayDB"],
                   Icon: Database
                 },
                 {
@@ -424,7 +433,7 @@ export default function Portfolio() {
                 },
                 {
                   titre: "Langages & Frameworks",
-                  items: ["Java", "C#/.NET", "PHP", "JavaScript/TypeScript", "WPF", "Twig"],
+                  items: ["Java", "C#/.NET", "PHP", "JavaScript/TypeScript", "Rust", "Twig"],
                   Icon: Code2
                 }
               ].map((categorie, i) => (
@@ -456,60 +465,48 @@ export default function Portfolio() {
           {/* Logiciels & Outils */}
 
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-10">
-  {logiciels.map((tool, i) => (
-    <div
-      key={tool.name}
-      className="
-        relative
-        flex flex-col items-center justify-center
-        p-5 rounded-2xl
-        bg-white/70 dark:bg-white/5
-        backdrop-blur-md
-        cursor-pointer
-        transition-all duration-500
-        hover:-translate-y-3 hover:rotate-1
-        hover:shadow-2xl
-      "
-      style={{
-        animation: `
-          logoEnter 0.6s ease-out forwards,
-          logoFloat 4s ease-in-out infinite
-        `,
-        animationDelay: `${i * 100}ms`,
-        opacity: 0
-      }}
-    >
-      {/* Glow */}
+      {/* Logiciels & Outils */}
+<div className="mt-20">
+  <h4 className="text-3xl font-bold text-center text-gray-900 mb-12">
+    Logiciels & <span className="gradient-text">Outils</span>
+  </h4>
+
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12 max-w-5xl mx-auto">
+    {logiciels.map((tool, i) => (
       <div
+        key={tool.name}
         className="
-          absolute inset-0 rounded-2xl
-          opacity-0 hover:opacity-100
-          transition-opacity duration-500
-          bg-gradient-to-br from-blue-500/20 to-purple-500/20
-          blur-xl
+          flex flex-col items-center justify-center
+          p-6 rounded-2xl
+          bg-white/70 dark:bg-white/5
+          backdrop-blur-lg
+          border border-white/40
+          shadow-md
+          transition-all duration-300
+          hover:-translate-y-2
+          hover:shadow-xl
         "
-      />
+        style={{
+          animation: `fadeUp 0.6s ease-out forwards`,
+          animationDelay: `${i * 100}ms`,
+          opacity: 0
+        }}
+      >
+        {/* Logo */}
+        <img
+          src={tool.logo}
+          alt={tool.name}
+          className="w-14 h-14 object-contain mb-4"
+          draggable={false}
+        />
 
-      {/* Logo */}
-      <img
-        src={tool.logo}
-        alt={tool.name}
-        className="
-          w-14 h-14 object-contain mb-3
-          relative z-10
-          transition-transform duration-500
-          hover:scale-110
-        "
-        draggable={false}
-      />
-
-      {/* Nom */}
-      <span className="relative z-10 text-sm font-semibold text-gray-700 dark:text-gray-300">
-        {tool.name}
-      </span>
-    </div>
-  ))}
+        {/* Nom */}
+        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 text-center">
+          {tool.name}
+        </span>
+      </div>
+    ))}
+  </div>
 </div>
 
 
