@@ -189,10 +189,36 @@ export default function Portfolio() {
 
   const projets = [
     {
+      id: 0,
+      titre: "HAKOWAY ",
+      type: "Application Professionnelle",
+      annee: "2026",
+      tech: ["React", "Vite", "Tailwind CSS", "FastAPI", "Python", "Leaflet", "PostgreSQL", "SQLAlchemy", "PostGIS"],
+      description: "Application full-stack de comparaison des prix de carburant en France, pensée en mode PWA mobile-first.",
+      contexte: "Projet personnel - Application de comparaison de prixs de carburant",
+      details: "Application web moderne avec React et FastAPI. Frontend réactif avec Vite et Tailwind CSS, backend performant en Python avec FastAPI, base de données PostgreSQL avec extensions PostGIS pour la géolocalisation, intégration de l'API de prix-carburants.gouv.fr pour les données en temps réel.",
+      competences: ["React", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
+      impact: "Trouver le carburant le moins cher en temps réel, économie de 15% sur les dépenses carburant",
+      site: "https://station-3a4t.vercel.app/"
+    },
+    {
       id: 1,
+      titre: "Intermarché - Gestion Logistique",
+      type: "Application Professionnelle",
+      annee: "2026",
+      tech: ["Vue.js", "Node.js + Express", "Three.js", "PostgreSQL", "Supabase"],
+      description: "Application web pour la gestion et optimisation des préparations de commandes en base logistique.",
+      contexte: "Projet académique professionnel - Système logistique",
+      details: "Application web temps réel avec stack moderne. Frontend Vue.js avec Composition API, backend Node.js avec Express, WebSockets pour les mises à jour en temps réel.",
+      competences: ["Vue.js Composition API", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
+      impact: "Optimisation de 48% du processus de préparation, réduction des erreurs",
+      github: "#"
+    },
+    {
+      id: 2,
       titre: "Application Mobile Siraj",
       type: "Développement Mobile",
-      annee: "2024",
+      annee: "2025",
       tech: ["Android Studio", "Java", "Gradle", "JSON", "XML"],
       description: "Application Android native dédiée à la lecture, la méditation et l'apprentissage avec une IA intégrée.",
       contexte: "Projet personnel - Développement mobile natif",
@@ -202,7 +228,7 @@ export default function Portfolio() {
       github: "https://github.com/Camss213/SirajApp"
     },
     {
-      id: 2,
+      id: 3,
       titre: "Plateforme de Facturation - Garage Automobile",
       type: "Développement Web",
       annee: "2024",
@@ -216,7 +242,7 @@ export default function Portfolio() {
       site: "https://routedupneu.netlify.app/"
     },
     {
-      id: 3,
+      id: 4,
       titre: "CTVR - Gestion Transport Urbain",
       type: "Application Full-Stack",
       annee: "2024",
@@ -229,7 +255,7 @@ export default function Portfolio() {
       github: "https://github.com/Camss213/CTVR.git"
     },
     {
-      id: 4,
+      id: 5,
       titre: "TurismoOne - Location de Véhicules",
       type: "E-Commerce",
       annee: "2023-2024",
@@ -242,7 +268,7 @@ export default function Portfolio() {
       github: "https://github.com/Camss213/turismoone"
     },
     {
-      id: 5,
+      id: 6,
       titre: "E-Commerce Les Inspirations d'Oumy",
       type: "Développement Web",
       annee: "2024",
@@ -255,7 +281,7 @@ export default function Portfolio() {
       github: "https://github.com/Camss213/LesInspirationd-Oumy"
     },
     {
-      id: 6,
+      id: 7,
       titre: "Architecture Client-Serveur avec VM",
       type: "Systèmes Distribués",
       annee: "2023",
@@ -265,19 +291,6 @@ export default function Portfolio() {
       details: "Application développée avec Visual Studio et le framework .NET. Interface graphique WPF, implémentation de protocoles réseau avec sockets TCP/IP, gestion du multi-threading.",
       competences: ["Framework .NET", "Programmation réseau", "Multi-threading", "Interface WPF"],
       impact: "Communication client-serveur stable avec gestion multi-clients"
-    },
-    {
-      id: 7,
-      titre: "Intermarché - Gestion Logistique",
-      type: "Application Professionnelle",
-      annee: "En cours",
-      tech: ["Vue.js", "Node.js + Express", "Three.js", "PostgreSQL", "Docker"],
-      description: "Application web pour la gestion et optimisation des préparations de commandes en base logistique.",
-      contexte: "Projet académique professionnel - Système logistique",
-      details: "Application web temps réel avec stack moderne. Frontend Vue.js avec Composition API, backend Node.js avec Express, WebSockets pour les mises à jour en temps réel.",
-      competences: ["Vue.js Composition API", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
-      impact: "Optimisation de 48% du processus de préparation, réduction des erreurs",
-      github: "#"
     }
   ];
 
