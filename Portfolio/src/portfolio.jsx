@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, ChevronRight, Calendar, MapPin, Smartphone, Palette, Settings, Database, Rocket, Code2, FileText, Lightbulb, Target, Zap, Download, X } from 'lucide-react';
 import * as THREE from 'three';
 
@@ -187,111 +187,137 @@ export default function Portfolio() {
     };
   }, [rotation]);
 
-  const projets = [
-    {
-      id: 0,
-      titre: "HAKOWAY ",
-      type: "Application Professionnelle",
-      annee: "2026",
-      tech: ["React", "Vite", "Tailwind CSS", "FastAPI", "Python", "Leaflet", "PostgreSQL", "SQLAlchemy", "PostGIS"],
-      description: "Application full-stack de comparaison des prix de carburant en France, pensée en mode PWA mobile-first.",
-      contexte: "Projet personnel - Application de comparaison de prixs de carburant",
-      details: "Application web moderne avec React et FastAPI. Frontend réactif avec Vite et Tailwind CSS, backend performant en Python avec FastAPI, base de données PostgreSQL avec extensions PostGIS pour la géolocalisation, intégration de l'API de prix-carburants.gouv.fr pour les données en temps réel.",
-      competences: ["React", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
-      impact: "Trouver le carburant le moins cher en temps réel, économie de 15% sur les dépenses carburant",
-      site: "https://station-3a4t.vercel.app/"
-    },
-    {
-      id: 1,
-      titre: "Intermarché - Gestion Logistique",
-      type: "Application Professionnelle",
-      annee: "2026",
-      tech: ["Vue.js", "Node.js + Express", "Three.js", "PostgreSQL", "Supabase"],
-      description: "Application web pour la gestion et optimisation des préparations de commandes en base logistique.",
-      contexte: "Projet académique professionnel - Système logistique",
-      details: "Application web temps réel avec stack moderne. Frontend Vue.js avec Composition API, backend Node.js avec Express, WebSockets pour les mises à jour en temps réel.",
-      competences: ["Vue.js Composition API", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
-      impact: "Optimisation de 48% du processus de préparation, réduction des erreurs",
-      github: "#"
-    },
-    {
-      id: 2,
-      titre: "Application Mobile Siraj",
-      type: "Développement Mobile",
-      annee: "2025",
-      tech: ["Android Studio", "Java", "Gradle", "JSON", "XML"],
-      description: "Application Android native dédiée à la lecture, la méditation et l'apprentissage avec une IA intégrée.",
-      contexte: "Projet personnel - Développement mobile natif",
-      details: "Développement complet d'une application mobile native Android avec Android Studio. Architecture MVVM, gestion du cycle de vie Android, stockage local avec fichiers JSON et interface Material Design.",
-      competences: ["Architecture Android", "Java", "JSON", "Material Design", "Optimisation performance"],
-      impact: "Application native performante avec mode offline complet",
-      github: "https://github.com/Camss213/SirajApp"
-    },
-    {
-      id: 3,
-      titre: "Plateforme de Facturation - Garage Automobile",
-      type: "Développement Web",
-      annee: "2024",
-      tech: ["HTML5", "CSS3", "JavaScript"],
-      description: "Site web de génération automatique de factures pour un garage automobile avec interface responsive.",
-      contexte: "Projet client professionnel",
-      details: "Développement web front-end en JavaScript. Système de calcul dynamique des factures, validation des formulaires côté client, génération de PDF pour impression.",
-      competences: ["JavaScript", "Responsive Design", "UX/UI"],
-      impact: "Automatisation complète du processus de génération de facture, gain de temps de 90%",
-      github: "https://github.com/Camss213/Routedupneu",
-      site: "https://routedupneu.netlify.app/"
-    },
-    {
-      id: 4,
-      titre: "CTVR - Gestion Transport Urbain",
-      type: "Application Full-Stack",
-      annee: "2024",
-      tech: ["Angular", "Spring Boot", "PostgreSQL", "JWT", "TypeScript"],
-      description: "Système de gestion des accidents et incidents pour la Compagnie de Transport de la Vallée du Rhône.",
-      contexte: "Projet tutoré académique",
-      details: "Application enterprise avec architecture moderne : frontend Angular avec TypeScript et RxJS, backend Spring Boot avec API RESTful, base de données PostgreSQL. Authentification JWT, gestion des rôles.",
-      competences: ["Architecture MVC", "API REST", "Sécurité JWT", "Base de données relationnelle", "Tests"],
-      impact: "Traçabilité complète des incidents, reporting automatisé et analyse statistique",
-      github: "https://github.com/Camss213/CTVR.git"
-    },
-    {
-      id: 5,
-      titre: "TurismoOne - Location de Véhicules",
-      type: "E-Commerce",
-      annee: "2023-2024",
-      tech: ["Symfony", "PHP", "Doctrine ORM", "RailwayDB", "Twig"],
-      description: "Plateforme de réservation en ligne pour location de voitures entre particuliers.",
-      contexte: "Projet personnel - Framework PHP",
-      details: "Développement avec le framework Symfony suivant l'architecture MVC. Utilisation de Doctrine ORM pour la gestion de la base de données RailwayDB, templates Twig pour le rendu.",
-      competences: ["Framework Symfony", "ORM Doctrine", "MVC Pattern", "Gestion de projet"],
-      impact: "Plateforme complète avec réservations en ligne et gestion automatisée",
-      github: "https://github.com/Camss213/turismoone"
-    },
-    {
-      id: 6,
-      titre: "E-Commerce Les Inspirations d'Oumy",
-      type: "Développement Web",
-      annee: "2024",
-      tech: ["PHP", "Docker", "PostgreSQL", "Nginx", "Docker Compose"],
-      description: "Boutique en ligne pour une commerçante spécialisée dans les produits faits main.",
-      contexte: "Projet client professionnel",
-      details: "Site e-commerce développé en PHP avec architecture containerisée. Configuration Docker multi-conteneurs : Nginx comme reverse proxy, PHP-FPM pour l'exécution et PostgreSQL pour la base de données.",
-      competences: ["Architecture Docker", "DevOps", "Multi-conteneurs", "Configuration serveur"],
-      impact: "Architecture moderne et scalable, déploiement simplifié",
-      github: "https://github.com/Camss213/LesInspirationd-Oumy"
-    },
-    {
-      id: 7,
-      titre: "Architecture Client-Serveur avec VM",
-      type: "Systèmes Distribués",
-      annee: "2023",
-      tech: ["Oracle Virtual Box", "Bash", "Sockets TCP/IP"],
-      description: "Implémentation d'une architecture client-serveur avec gestion de machines virtuelles.",
-      contexte: "Projet académique - Programmation système",
-      details: "Application développée avec Visual Studio et le framework .NET. Interface graphique WPF, implémentation de protocoles réseau avec sockets TCP/IP, gestion du multi-threading.",
-      competences: ["Framework .NET", "Programmation réseau", "Multi-threading", "Interface WPF"],
-      impact: "Communication client-serveur stable avec gestion multi-clients"
-    }
+  const projets = [{
+    id: 8,
+    titre: "Canéa - Gestion de RDV pour Salon de Toilettage",
+    type: "Application Web Full-Stack",
+    annee: "En cours de développement",
+    tech: ["Next.js 14 (App Router)", "TypeScript", "Supabase (PostgreSQL)", "NextAuth.js", "Tailwind CSS"],
+    description: "Application web de gestion de rendez-vous pour salon de toilettage avec un espace salon professionnel et un espace client.",
+    contexte: "Projet professionnel - Gestion des rendez-vous et relation client",
+    details: "Conception d'une plateforme web moderne permettant aux salons de gérer leurs disponibilités, leurs rendez-vous et leurs clients. Côté client, le site propose une prise de rendez-vous fluide avec sélection des créneaux. Côté salon, un espace d'administration complet centralise l'activité.",
+    competences: ["Next.js App Router", "Authentification NextAuth.js", "Base de données PostgreSQL", "UI responsive", "Architecture full-stack"],
+    impact: "Digitalisation complète de la prise de rendez-vous et amélioration de l'organisation du salon",
+    site: "https://canea.vercel.app/"
+  },
+  {
+    id: 9,
+    titre: "Cabinet MFR d'Avocat - Site Vitrine",
+    type: "Développement Web",
+    annee: "2026",
+    tech: ["Vite", "React", "JavaScript", "CSS", "Responsive Design"],
+    description: "Création d'un site vitrine professionnel pour le cabinet MFR d'avocat.",
+    contexte: "Projet client professionnel - Communication digitale",
+    details: "Développement d'un site clair, moderne et orienté conversion pour présenter le cabinet, les domaines d'expertise, les valeurs et les moyens de contact. L'interface est pensée pour rassurer les visiteurs et faciliter la prise de contact.",
+    competences: ["React", "Vite", "Intégration front-end", "UX/UI", "Optimisation responsive"],
+    impact: "Renforcement de la visibilité en ligne et amélioration de l'image professionnelle du cabinet",
+    github: "https://github.com/Camss213/cabinet_MFR",
+    site: "https://cabinet-mrf.vercel.app/"
+  },
+  {
+    id: 0,
+    titre: "HAKOWAY ",
+    type: "Application Professionnelle",
+    annee: "2026",
+    tech: ["React", "Vite", "Tailwind CSS", "FastAPI", "Python", "Leaflet", "PostgreSQL", "SQLAlchemy", "PostGIS"],
+    description: "Application full-stack de comparaison des prix de carburant en France, pensée en mode PWA mobile-first.",
+    contexte: "Projet personnel - Application de comparaison de prixs de carburant",
+    details: "Application web moderne avec React et FastAPI. Frontend réactif avec Vite et Tailwind CSS, backend performant en Python avec FastAPI, base de données PostgreSQL avec extensions PostGIS pour la géolocalisation, intégration de l'API de prix-carburants.gouv.fr pour les données en temps réel.",
+    competences: ["React", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
+    impact: "Trouver le carburant le moins cher en temps réel, économie de 15% sur les dépenses carburant",
+    site: "https://station-3a4t.vercel.app/"
+  },
+  {
+    id: 1,
+    titre: "Groupe Mousquetaires - Gestion Logistique",
+    type: "Application Professionnelle",
+    annee: "2026",
+    tech: ["Vue.js", "Node.js + Express", "Three.js", "PostgreSQL", "Supabase"],
+    description: "Application web pour la gestion et optimisation des préparations de commandes en base logistique.",
+    contexte: "Projet académique professionnel - Système logistique",
+    details: "Application web temps réel avec stack moderne. Frontend Vue.js avec Composition API, backend Node.js avec Express, WebSockets pour les mises à jour en temps réel.",
+    competences: ["Vue.js Composition API", "API REST", "WebSocket", "Architecture temps réel", "Optimisation"],
+    impact: "Optimisation de 48% du processus de préparation, réduction des erreurs",
+    github: "#"
+  },
+  {
+    id: 2,
+    titre: "Application Mobile Siraj",
+    type: "Développement Mobile",
+    annee: "2025",
+    tech: ["Android Studio", "Java", "Gradle", "JSON", "XML"],
+    description: "Application Android native dédiée à la lecture, la méditation et l'apprentissage avec une IA intégrée.",
+    contexte: "Projet personnel - Développement mobile natif",
+    details: "Développement complet d'une application mobile native Android avec Android Studio. Architecture MVVM, gestion du cycle de vie Android, stockage local avec fichiers JSON et interface Material Design.",
+    competences: ["Architecture Android", "Java", "JSON", "Material Design", "Optimisation performance"],
+    impact: "Application native performante avec mode offline complet",
+    github: "https://github.com/Camss213/SirajApp"
+  },
+  {
+    id: 3,
+    titre: "Plateforme de Facturation - Garage Automobile",
+    type: "Développement Web",
+    annee: "2024",
+    tech: ["HTML5", "CSS3", "JavaScript"],
+    description: "Site web de génération automatique de factures pour un garage automobile avec interface responsive.",
+    contexte: "Projet client professionnel",
+    details: "Développement web front-end en JavaScript. Système de calcul dynamique des factures, validation des formulaires côté client, génération de PDF pour impression.",
+    competences: ["JavaScript", "Responsive Design", "UX/UI"],
+    impact: "Automatisation complète du processus de génération de facture, gain de temps de 90%",
+    github: "https://github.com/Camss213/Routedupneu",
+    site: "https://routedupneu.netlify.app/"
+  },
+  {
+    id: 4,
+    titre: "CTVR - Gestion Transport Urbain",
+    type: "Application Full-Stack",
+    annee: "2024",
+    tech: ["Angular", "Spring Boot", "PostgreSQL", "JWT", "TypeScript"],
+    description: "Système de gestion des accidents et incidents pour la Compagnie de Transport de la Vallée du Rhône.",
+    contexte: "Projet tutoré académique",
+    details: "Application enterprise avec architecture moderne : frontend Angular avec TypeScript et RxJS, backend Spring Boot avec API RESTful, base de données PostgreSQL. Authentification JWT, gestion des rôles.",
+    competences: ["Architecture MVC", "API REST", "Sécurité JWT", "Base de données relationnelle", "Tests"],
+    impact: "Traçabilité complète des incidents, reporting automatisé et analyse statistique",
+    github: "https://github.com/Camss213/CTVR.git"
+  },
+  {
+    id: 5,
+    titre: "TurismoOne - Location de Véhicules",
+    type: "E-Commerce",
+    annee: "2023-2024",
+    tech: ["Symfony", "PHP", "Doctrine ORM", "RailwayDB", "Twig"],
+    description: "Plateforme de réservation en ligne pour location de voitures entre particuliers.",
+    contexte: "Projet personnel - Framework PHP",
+    details: "Développement avec le framework Symfony suivant l'architecture MVC. Utilisation de Doctrine ORM pour la gestion de la base de données RailwayDB, templates Twig pour le rendu.",
+    competences: ["Framework Symfony", "ORM Doctrine", "MVC Pattern", "Gestion de projet"],
+    impact: "Plateforme complète avec réservations en ligne et gestion automatisée",
+    github: "https://github.com/Camss213/turismoone"
+  },
+  {
+    id: 6,
+    titre: "E-Commerce Les Inspirations d'Oumy",
+    type: "Développement Web",
+    annee: "2024",
+    tech: ["PHP", "Docker", "PostgreSQL", "Nginx", "Docker Compose"],
+    description: "Boutique en ligne pour une commerçante spécialisée dans les produits faits main.",
+    contexte: "Projet client professionnel",
+    details: "Site e-commerce développé en PHP avec architecture containerisée. Configuration Docker multi-conteneurs : Nginx comme reverse proxy, PHP-FPM pour l'exécution et PostgreSQL pour la base de données.",
+    competences: ["Architecture Docker", "DevOps", "Multi-conteneurs", "Configuration serveur"],
+    impact: "Architecture moderne et scalable, déploiement simplifié",
+    github: "https://github.com/Camss213/LesInspirationd-Oumy"
+  },
+  {
+    id: 7,
+    titre: "Architecture Client-Serveur avec VM",
+    type: "Systèmes Distribués",
+    annee: "2023",
+    tech: ["Oracle Virtual Box", "Bash", "Sockets TCP/IP"],
+    description: "Implémentation d'une architecture client-serveur avec gestion de machines virtuelles.",
+    contexte: "Projet académique - Programmation système",
+    details: "Application développée avec Visual Studio et le framework .NET. Interface graphique WPF, implémentation de protocoles réseau avec sockets TCP/IP, gestion du multi-threading.",
+    competences: ["Framework .NET", "Programmation réseau", "Multi-threading", "Interface WPF"],
+    impact: "Communication client-serveur stable avec gestion multi-clients"
+  }
   ];
 
   const logiciels = [
@@ -761,7 +787,7 @@ export default function Portfolio() {
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Calendar size={18} className="text-white" />
                   </div>
-                  <span className="font-medium text-xs sm:text-sm lg:text-base">Disponible pour Master / École d'Ingénieur</span>
+                  <span className="font-medium text-xs sm:text-sm lg:text-base">Master Expert Informatique et systèmes d'information</span>
                 </div>
               </div>
 
@@ -1215,3 +1241,4 @@ export default function Portfolio() {
     </div>
   );
 }
+
