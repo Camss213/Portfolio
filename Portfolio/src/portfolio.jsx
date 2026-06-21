@@ -188,6 +188,19 @@ export default function Portfolio() {
   }, [rotation]);
 
   const projets = [{
+    id: 9,
+    titre: "Wild Crocodile Adventure - Site Vitrine",
+    type: "Développement Web",
+    annee: "2026",
+    tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    description: "Création d’un site vitrine professionnel pour une entreprise d’excursions touristiques au Sri Lanka.",
+    contexte: "Projet client professionnel - Tourisme et communication digitale",
+    details: "Conception d’un site multilingue présentant les excursions, les crocodiles, les paysages et les avis clients. Intégration d’une galerie, de Google Maps et d’un système de réservation via WhatsApp avec formulaire sur mobile et QR code sur ordinateur.",
+    competences: ["Développement HTML, CSS et JavaScript","Responsive Design","Interface multilingue","Intégration WhatsApp","Intégration Google Maps","Optimisation de l’expérience utilisateur"],
+    impact: "Amélioration de la visibilité en ligne et simplification des réservations grâce à WhatsApp.",
+    site: "https://wild-crocodile.vercel.app"
+  },  
+    ,{
     id: 8,
     titre: "Canéa - Gestion de RDV pour Salon de Toilettage",
     type: "Application Web Full-Stack",
