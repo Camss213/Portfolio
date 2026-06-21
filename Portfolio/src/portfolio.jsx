@@ -794,14 +794,14 @@ export default function Portfolio() {
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <MapPin size={18} className="text-white" />
                   </div>
-                  <span className="font-medium">Valence, France</span>
+                  <span className="font-medium">Lyon, France</span>
                 </div>
 
                 <div className="group flex items-center gap-3 text-gray-700 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-purple-200 transition-all duration-300">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Calendar size={18} className="text-white" />
                   </div>
-                  <span className="font-medium text-xs sm:text-sm lg:text-base">Master Expert Informatique et systèmes d'information</span>
+                  <span className="font-medium text-xs sm:text-sm lg:text-base">Master of science spécialité <Cloud></Cloud></span>
                 </div>
               </div>
 
