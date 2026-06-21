@@ -198,6 +198,7 @@ export default function Portfolio() {
     details: "Conception d’un site multilingue présentant les excursions, les crocodiles, les paysages et les avis clients. Intégration d’une galerie, de Google Maps et d’un système de réservation via WhatsApp avec formulaire sur mobile et QR code sur ordinateur.",
     competences: ["Développement HTML, CSS et JavaScript","Responsive Design","Interface multilingue","Intégration WhatsApp","Intégration Google Maps","Optimisation de l’expérience utilisateur"],
     impact: "Amélioration de la visibilité en ligne et simplification des réservations grâce à WhatsApp.",
+    github: "https://github.com/Camss213/wild_crocodile",
     site: "https://wild-crocodile.vercel.app"
   },  
     ,{
