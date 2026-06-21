@@ -11,6 +11,65 @@ import dbeaverLogo from "./assets/logos/dbeaver.png";
 import trelloLogo from "./assets/logos/trello.png";
 import godotLogo from "./assets/logos/godot.png";
 
+function AnimatedCounter({ value, suffix = '', duration = 1600 }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const element = counterRef.current;
+    if (!element) return;
+
+    let animationFrame;
+    let hasAnimated = false;
+
+    const startAnimation = () => {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setDisplayValue(value);
+        return;
+      }
+
+      const startTime = performance.now();
+      const animateCounter = (currentTime) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        setDisplayValue(Math.round(value * easedProgress));
+
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(animateCounter);
+        }
+      };
+
+      animationFrame = requestAnimationFrame(animateCounter);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startAnimation();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [value, duration]);
+
+  return (
+    <span ref={counterRef} className="inline-block min-w-[2ch] tabular-nums" aria-label={`${value}${suffix}`}>
+      {displayValue}{suffix}
+    </span>
+  );
+}
+
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeSection, setActiveSection] = useState('');
@@ -46,6 +105,32 @@ export default function Portfolio() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Apparition progressive des éléments lorsqu'ils entrent dans l'écran
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      elements.forEach(element => element.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    elements.forEach(element => observer.observe(element));
+    return () => observer.disconnect();
   }, []);
 
   // Three.js - Logo icosaèdre animé
@@ -442,6 +527,17 @@ export default function Portfolio() {
             transform: translateY(-10px);
           }
         }
+
+        @keyframes blobDrift {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          35% { transform: translate3d(-24px, 18px, 0) scale(1.08); }
+          70% { transform: translate3d(18px, -14px, 0) scale(0.94); }
+        }
+
+        @keyframes heroEnter {
+          from { opacity: 0; transform: translateY(26px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         
         @keyframes pulse {
           0%, 100% {
@@ -475,8 +571,62 @@ export default function Portfolio() {
         
         .gradient-text { 
           background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); 
+          background-size: 180% 180%;
           -webkit-background-clip: text; 
           -webkit-text-fill-color: transparent; 
+        }
+
+        .hero-intro > * {
+          opacity: 0;
+          animation: heroEnter 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .hero-intro > *:nth-child(1) { animation-delay: 0.05s; }
+        .hero-intro > *:nth-child(2) { animation-delay: 0.16s; }
+        .hero-intro > *:nth-child(3) { animation-delay: 0.27s; }
+        .hero-intro > *:nth-child(4) { animation-delay: 0.38s; }
+        .hero-intro > *:nth-child(5) { animation-delay: 0.49s; }
+        .hero-intro > *:nth-child(6) { animation-delay: 0.6s; }
+
+        .floating-blob {
+          animation: blobDrift 10s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        .floating-blob-delayed {
+          animation-delay: -5s;
+          animation-duration: 12s;
+        }
+
+        .reveal {
+          opacity: 0;
+          transform: translateY(34px);
+          transition:
+            opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+          transition-delay: var(--reveal-delay, 0ms);
+        }
+
+        .reveal-scale {
+          transform: translateY(20px) scale(0.96);
+        }
+
+        .reveal.is-visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        .button-shine::after {
+          content: '';
+          position: absolute;
+          inset: -50%;
+          background: linear-gradient(110deg, transparent 38%, rgba(255,255,255,.35) 50%, transparent 62%);
+          transform: translateX(-70%) rotate(8deg);
+          transition: transform 0.7s ease;
+        }
+
+        .button-shine:hover::after {
+          transform: translateX(70%) rotate(8deg);
         }
         
         .card-hover { 
@@ -617,6 +767,20 @@ export default function Portfolio() {
           
           .hero-title {
             font-size: 3rem !important;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+
+          .reveal {
+            opacity: 1;
+            transform: none;
           }
         }
       `}</style>
@@ -778,11 +942,11 @@ export default function Portfolio() {
         {/* Section Hero */}
         <section className="pt-32 pb-20 px-6 min-h-screen flex items-center relative overflow-hidden">
           {/* Decorative elements */}
-          <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-gradient-to-tr from-purple-200/20 to-blue-200/20 rounded-full blur-3xl" />
+          <div className="floating-blob absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full blur-3xl" />
+          <div className="floating-blob floating-blob-delayed absolute bottom-1/4 left-0 w-80 h-80 bg-gradient-to-tr from-purple-200/20 to-blue-200/20 rounded-full blur-3xl" />
 
           <div className="max-w-6xl mx-auto w-full relative z-10">
-            <div className="max-w-4xl" style={{ animation: 'slideInLeft 0.8s ease-out' }}>
+            <div className="max-w-4xl hero-intro">
               {/* Badge disponibilité */}
               <div className="inline-flex items-center gap-2 mb-8 px-5 py-3 bg-white/80 backdrop-blur-sm rounded-full text-blue-600 font-medium text-xs md:text-sm border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
                 <Rocket size={16} className="animate-pulse" />
@@ -822,7 +986,7 @@ export default function Portfolio() {
               <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                 <a
                   href="#contact"
-                  className="group px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold glow-effect flex items-center justify-center gap-3 text-sm md:text-base relative overflow-hidden"
+                  className="button-shine group px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold glow-effect flex items-center justify-center gap-3 text-sm md:text-base relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <Mail size={20} className="relative z-10 group-hover:rotate-12 transition-transform" />
@@ -845,15 +1009,21 @@ export default function Portfolio() {
               <div className="mt-16 pt-8 border-t border-gray-200/50">
                 <div className="grid grid-cols-3 gap-6 max-w-2xl">
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">7+</div>
+                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
+                      <AnimatedCounter value={12} suffix="+" />
+                    </div>
                     <div className="text-xs md:text-sm text-gray-600">Projets réalisés</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">10+</div>
+                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
+                      <AnimatedCounter value={10} suffix="+" />
+                    </div>
                     <div className="text-xs md:text-sm text-gray-600">Technologies</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">2024</div>
+                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
+                      <AnimatedCounter value={2024} duration={2000} />
+                    </div>
                     <div className="text-xs md:text-sm text-gray-600">En formation</div>
                   </div>
                 </div>
@@ -865,7 +1035,7 @@ export default function Portfolio() {
         {/* Section Projets */}
         <section id="projets" className="scroll-mt-32 py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-6xl mx-auto">
-            <div className="mb-16 text-center">
+            <div className="reveal mb-16 text-center" data-reveal>
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                 Projets <span className="gradient-text">Réalisés</span>
               </h3>
@@ -879,12 +1049,9 @@ export default function Portfolio() {
                 <div
                   key={projet.id}
                   onClick={() => setSelectedProject(projet)}
-                  className="glassmorphism rounded-2xl p-6 md:p-8 card-hover cursor-pointer group relative overflow-hidden border border-gray-200"
-                  style={{
-                    animation: `slideUp 0.5s ease-out ${index * 0.1}s forwards`,
-                    opacity: 0,
-                    animationFillMode: 'forwards'
-                  }}
+                  className="reveal glassmorphism rounded-2xl p-6 md:p-8 card-hover cursor-pointer group relative overflow-hidden border border-gray-200"
+                  data-reveal
+                  style={{ '--reveal-delay': `${(index % 4) * 90}ms` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -937,7 +1104,7 @@ export default function Portfolio() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-50" />
 
           <div className="max-w-6xl mx-auto relative">
-            <div className="mb-16 text-center">
+            <div className="reveal mb-16 text-center" data-reveal>
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                 Compétences <span className="gradient-text">Techniques</span>
               </h3>
@@ -979,12 +1146,9 @@ export default function Portfolio() {
               ].map((categorie, i) => (
                 <div
                   key={i}
-                  className="glassmorphism rounded-2xl p-5 md:p-6 card-hover group border border-gray-200"
-                  style={{
-                    animation: `scaleIn 0.5s ease-out ${i * 0.1}s forwards`,
-                    opacity: 0,
-                    animationFillMode: 'forwards'
-                  }}
+                  className="reveal reveal-scale glassmorphism rounded-2xl p-5 md:p-6 card-hover group border border-gray-200"
+                  data-reveal
+                  style={{ '--reveal-delay': `${i * 90}ms` }}
                 >
                   <div className="mb-4 text-blue-600 group-hover:text-purple-600 group-hover:scale-110 transition-all duration-300">
                     <categorie.Icon size={32} strokeWidth={1.5} className="md:w-10 md:h-10" />
@@ -1010,7 +1174,7 @@ export default function Portfolio() {
             </div>
 
             {/* Logiciels & Outils */}
-            <div>
+            <div className="reveal" data-reveal>
               <h4 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
                 Logiciels & <span className="gradient-text">Outils</span>
               </h4>
@@ -1019,12 +1183,9 @@ export default function Portfolio() {
                 {logiciels.map((tool, i) => (
                   <div
                     key={tool.name}
-                    className="flex flex-col items-center justify-center p-4 md:p-6 rounded-2xl glassmorphism border border-gray-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
-                    style={{
-                      animation: `fadeUp 0.6s ease-out forwards`,
-                      animationDelay: `${i * 100}ms`,
-                      opacity: 0
-                    }}
+                    className="reveal reveal-scale flex flex-col items-center justify-center p-4 md:p-6 rounded-2xl glassmorphism border border-gray-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
+                    data-reveal
+                    style={{ '--reveal-delay': `${(i % 4) * 80}ms` }}
                   >
                     <div className="w-12 h-12 md:w-16 md:h-16 bg-white rounded-xl p-2 md:p-3 mb-3 md:mb-4 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-300">
                       <img
@@ -1047,7 +1208,7 @@ export default function Portfolio() {
 
         {/* Section Contact */}
         <section id="contact" className="scroll-mt-32 py-20 px-6 bg-gradient-to-b from-white to-gray-50">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="reveal max-w-4xl mx-auto text-center" data-reveal>
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 md:mb-8 px-4">
               Restons en <span className="gradient-text">Contact</span>
             </h3>
