@@ -188,6 +188,19 @@ export default function Portfolio() {
   }, [rotation]);
 
   const projets = [{
+    id: 10,
+    titre: "11A Travels - Site Vitrine",
+    type: "Développement Web",
+    annee: "2026",
+    tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    description: "Création d’un site vitrine multilingue pour une agence de transport et d’excursions touristiques au Sri Lanka.",
+    contexte: "Projet client professionnel - Tourisme, transport et communication digitale",
+    details: "Conception d’un site responsive présentant les principales destinations du Sri Lanka, leurs activités et lieux incontournables. Intégration de cinq langues, d’une navigation dynamique, de fiches détaillées et d’un système de contact et de réservation via WhatsApp.",
+    competences: ["Développement HTML, CSS et JavaScript","Responsive Design","Interface multilingue","Création de contenus dynamiques","Intégration WhatsApp","Optimisation de l’expérience utilisateur"],
+    impact: "Amélioration de la visibilité en ligne de l’agence et simplification des demandes de transport et de réservation.",
+    github: "https://github.com/Camss213/11A-Travel",
+    site: "https://11a-travel.vercel.app/"
+  },{
     id: 9,
     titre: "Wild Crocodile Adventure - Site Vitrine",
     type: "Développement Web",
