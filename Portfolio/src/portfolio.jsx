@@ -801,7 +801,7 @@ export default function Portfolio() {
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Calendar size={18} className="text-white" />
                   </div>
-                  <span className="font-medium text-xs sm:text-sm lg:text-base">Master of science spécialité <Cloud></Cloud></span>
+                  <span className="font-medium text-xs sm:text-sm lg:text-base">Master of science spécialité Cloud</span>
                 </div>
               </div>
 
