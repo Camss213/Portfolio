@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, ChevronRight, Calendar, MapPin, Smartphone, Palette, Settings, Database, Rocket, Code2, FileText, Lightbulb, Target, Zap, Download, X } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, ChevronRight, Calendar, MapPin, Smartphone, Palette, Settings, Database, Rocket, Code2, FileText, Lightbulb, Target, Zap, Download, X, GraduationCap, Briefcase } from 'lucide-react';
 import * as THREE from 'three';
 
 import dockerLogo from "./assets/logos/docker.png";
@@ -10,6 +10,20 @@ import androidLogo from "./assets/logos/android.png";
 import dbeaverLogo from "./assets/logos/dbeaver.png";
 import trelloLogo from "./assets/logos/trello.png";
 import godotLogo from "./assets/logos/godot.png";
+import intellijLogo from "./assets/logos/intellij.png";
+import visualStudioLogo from "./assets/logos/visualstudio.png";
+import supabaseLogo from "./assets/logos/supabase.png";
+import virtualBoxLogo from "./assets/logos/virtualbox.png";
+import jiraLogo from "./assets/logos/jira.png";
+import notionLogo from "./assets/logos/notion.png";
+import canvaLogo from "./assets/logos/canva.png";
+import postmanLogo from "./assets/logos/postman.png";
+import nginxLogo from "./assets/logos/nginx.png";
+import linuxLogo from "./assets/logos/linux.png";
+import vercelLogo from "./assets/logos/vercel.png";
+import netlifyLogo from "./assets/logos/netlify.png";
+import vmwareLogo from "./assets/logos/vmware.png";
+import gitlabLogo from "./assets/logos/gitlab.png";
 
 function AnimatedCounter({ value, suffix = '', duration = 1600 }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -72,6 +86,7 @@ function AnimatedCounter({ value, suffix = '', duration = 1600 }) {
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [showAllTools, setShowAllTools] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const canvasRef = useRef(null);
@@ -91,7 +106,7 @@ export default function Portfolio() {
       setScrollProgress(progress);
 
       // Détection de la section active
-      const sections = ['projets', 'competences', 'contact'];
+      const sections = ['formation', 'projets', 'competences', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -239,9 +254,10 @@ export default function Portfolio() {
       color: 0x2563eb,
       wireframe: true,
       transparent: true,
-      opacity: 0.15
+      opacity: 0.1
     });
     const torus = new THREE.Mesh(geometry, material);
+    torus.position.x = 2;
     scene.add(torus);
 
     const animate = () => {
@@ -298,8 +314,8 @@ export default function Portfolio() {
     impact: "Amélioration de la visibilité en ligne et simplification des réservations grâce à WhatsApp.",
     github: "https://github.com/Camss213/wild_crocodile",
     site: "https://wild-crocodile.vercel.app"
-  },  
-    ,{
+  },
+  {
     id: 8,
     titre: "Canéa - Gestion de RDV pour Salon de Toilettage",
     type: "Application Web Full-Stack",
@@ -313,7 +329,7 @@ export default function Portfolio() {
     site: "https://canea.vercel.app/"
   },
   {
-    id: 9,
+    id: 11,
     titre: "Cabinet MFR d'Avocat - Site Vitrine",
     type: "Développement Web",
     annee: "2026",
@@ -433,15 +449,31 @@ export default function Portfolio() {
   ];
 
   const logiciels = [
-    { name: "Android Studio", logo: androidLogo },
-    { name: "VS Code", logo: vscodeLogo },
-    { name: "Godot", logo: godotLogo },
-    { name: "Docker", logo: dockerLogo },
-    { name: "GitHub", logo: githubLogo },
-    { name: "Figma", logo: figmaLogo },
-    { name: "DBeaver", logo: dbeaverLogo },
-    { name: "Trello", logo: trelloLogo }
+    { name: "VS Code", category: "Développement", logo: vscodeLogo },
+    { name: "Visual Studio", category: "Développement", logo: visualStudioLogo },
+    { name: "IntelliJ IDEA", category: "Développement", logo: intellijLogo },
+    { name: "Android Studio", category: "Développement", logo: androidLogo },
+    { name: "DBeaver", category: "Bases de données", logo: dbeaverLogo },
+    { name: "Supabase", category: "Bases de données", logo: supabaseLogo },
+    { name: "Docker", category: "DevOps & Cloud", logo: dockerLogo },
+    { name: "GitHub", category: "DevOps & Cloud", logo: githubLogo },
+    { name: "GitLab", category: "DevOps & Cloud", logo: gitlabLogo },
+    { name: "Linux", category: "DevOps & Cloud", logo: linuxLogo },
+    { name: "Nginx", category: "DevOps & Cloud", logo: nginxLogo },
+    { name: "Vercel", category: "DevOps & Cloud", logo: vercelLogo },
+    { name: "Netlify", category: "DevOps & Cloud", logo: netlifyLogo },
+    { name: "Postman", category: "Tests d’API", logo: postmanLogo },
+    { name: "Figma", category: "Conception", logo: figmaLogo },
+    { name: "Canva", category: "Conception", logo: canvaLogo },
+    { name: "Trello", category: "Gestion de projet", logo: trelloLogo },
+    { name: "Jira", category: "Gestion de projet", logo: jiraLogo },
+    { name: "Notion", category: "Gestion de projet", logo: notionLogo },
+    { name: "VirtualBox", category: "Virtualisation", logo: virtualBoxLogo },
+    { name: "VMware", category: "Virtualisation", logo: vmwareLogo },
+    { name: "Godot", category: "Outils spécialisés", logo: godotLogo }
   ];
+
+  const visibleLogiciels = showAllTools ? logiciels : logiciels.slice(0, 12);
 
   const currentYear = new Date().getFullYear();
 
@@ -845,12 +877,21 @@ export default function Portfolio() {
               <canvas ref={logoCanvasRef} className="w-16 h-16 md:w-20 md:h-20" />
               <div>
                 <h1 className="text-lg md:text-xl font-bold gradient-text">Camelia Difi</h1>
-                <p className="text-xs text-gray-500">Développeuse Full-Stack</p>
+                <p className="text-xs text-gray-500">Full-Stack • Mobile • Cloud</p>
               </div>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-8 text-sm font-medium">
+              <a
+                href="#formation"
+                className={`hover:text-blue-600 transition-colors relative ${activeSection === 'formation' ? 'text-blue-600' : ''}`}
+              >
+                Formation
+                {activeSection === 'formation' && (
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600" />
+                )}
+              </a>
               <a
                 href="#projets"
                 className={`hover:text-blue-600 transition-colors relative ${activeSection === 'projets' ? 'text-blue-600' : ''}`}
@@ -901,6 +942,13 @@ export default function Portfolio() {
         {/* Mobile Menu */}
         <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <nav className="flex flex-col gap-6">
+            <a
+              href="#formation"
+              className={`text-lg font-medium hover:text-blue-600 transition-colors pb-3 border-b border-gray-200 ${activeSection === 'formation' ? 'text-blue-600' : 'text-gray-900'}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Formation
+            </a>
             <a
               href="#projets"
               className={`text-lg font-medium hover:text-blue-600 transition-colors pb-3 border-b border-gray-200 ${activeSection === 'projets' ? 'text-blue-600' : 'text-gray-900'}`}
@@ -957,12 +1005,15 @@ export default function Portfolio() {
               <h2 className="hero-title text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
                 Développeuse <span className="gradient-text">Full-Stack</span>
                 <br />& Mobile
+                <span className="block mt-2 text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-600">
+                  En spécialisation <span className="gradient-text">Cloud</span>
+                </span>
               </h2>
 
               {/* Description */}
               <p className="text-base md:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
-                Spécialisée en développement web et mobile avec une expertise en architecture full-stack,
-                du développement Android natif aux applications web modernes.
+                Développeuse full-stack et mobile, je conçois des applications modernes de bout en bout.
+                Ma spécialisation Cloud complète ce profil avec les architectures cloud, le DevOps et le déploiement.
               </p>
 
               {/* Badges info */}
@@ -1022,12 +1073,84 @@ export default function Portfolio() {
                   </div>
                   <div className="text-center">
                     <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-                      <AnimatedCounter value={2024} duration={2000} />
+                      <AnimatedCounter value={3} />
                     </div>
-                    <div className="text-xs md:text-sm text-gray-600">En formation</div>
+                    <div className="text-xs md:text-sm text-gray-600">Expériences professionnelles</div>
                   </div>
                 </div>
               </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* Section Formation */}
+        <section id="formation" className="scroll-mt-32 py-20 px-6 bg-gradient-to-b from-white to-gray-50">
+          <div className="max-w-5xl mx-auto">
+            <div className="reveal mb-16 text-center" data-reveal>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Mon <span className="gradient-text">Parcours</span>
+              </h3>
+              <p className="text-base md:text-lg text-gray-600 px-4">
+                Formation académique et expériences professionnelles
+              </p>
+            </div>
+
+            <div className="relative space-y-6 before:absolute before:left-6 md:before:left-8 before:top-8 before:bottom-8 before:w-px before:bg-gradient-to-b before:from-blue-500 before:to-purple-500">
+              {[
+                {
+                  periode: "2026 — 2028",
+                  diplome: "Master of Science — Spécialité Cloud",
+                  etablissement: "Epitech Lyon",
+                  lieu: "Lyon",
+                  experience: "Alternance chez Thales"
+                },
+                {
+                  periode: "2023 — 2026",
+                  diplome: "BUT Informatique",
+                  etablissement: "IUT de Valence",
+                  lieu: "Valence",
+                  experience: "2e année : stage chez Decathlon Digital à Alger · 3e année : alternance chez IPM France à Romans-sur-Isère"
+                },
+                {
+                  periode: "2020 — 2023",
+                  diplome: "Baccalauréat général",
+                  etablissement: "Lycée Vincent-d’Indy",
+                  lieu: "Privas",
+                  experience: "Spécialités Physique-Chimie et SVT"
+                }
+              ].map((formation, index) => (
+                <article
+                  key={formation.periode}
+                  className="reveal relative pl-16 md:pl-24"
+                  data-reveal
+                  style={{ '--reveal-delay': `${index * 100}ms` }}
+                >
+                  <div className="absolute left-0 md:left-2 top-6 w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 text-white flex items-center justify-center shadow-lg ring-4 ring-white">
+                    <GraduationCap size={24} />
+                  </div>
+                  <div className="glassmorphism rounded-2xl p-5 md:p-7 border border-gray-200 card-hover">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
+                      <div>
+                        <h4 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">{formation.diplome}</h4>
+                        <p className="text-blue-600 font-semibold">{formation.etablissement}</p>
+                      </div>
+                      <span className="inline-flex self-start items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 text-xs md:text-sm font-semibold border border-blue-100 whitespace-nowrap">
+                        <Calendar size={15} />
+                        {formation.periode}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-2 text-sm md:text-base text-gray-600 mb-3">
+                      <MapPin size={18} className="text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span>{formation.lieu}</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-sm md:text-base text-gray-700 leading-relaxed pt-3 border-t border-gray-200">
+                      <Briefcase size={18} className="text-blue-600 flex-shrink-0 mt-0.5" />
+                      <span>{formation.experience}</span>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -1179,28 +1302,38 @@ export default function Portfolio() {
                 Logiciels & <span className="gradient-text">Outils</span>
               </h4>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
-                {logiciels.map((tool, i) => (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 max-w-5xl mx-auto" aria-label="Logiciels et outils maîtrisés">
+                  {visibleLogiciels.map(tool => (
                   <div
                     key={tool.name}
-                    className="reveal reveal-scale flex flex-col items-center justify-center p-4 md:p-6 rounded-2xl glassmorphism border border-gray-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
-                    data-reveal
-                    style={{ '--reveal-delay': `${(i % 4) * 80}ms` }}
+                    className="glassmorphism group flex items-center gap-3 p-3 md:p-4 rounded-2xl border border-blue-100 bg-white/80 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 min-w-0"
                   >
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-white rounded-xl p-2 md:p-3 mb-3 md:mb-4 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-300">
+                    <div className="w-13 h-13 bg-white rounded-xl p-2.5 flex-shrink-0 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow duration-300">
                       <img
                         src={tool.logo}
-                        alt={tool.name}
+                        alt=""
                         className="w-full h-full object-contain"
                         draggable={false}
                       />
                     </div>
-
-                    <span className="text-xs md:text-sm font-semibold text-gray-700 text-center">
-                      {tool.name}
-                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm md:text-base font-semibold text-gray-900 leading-tight">{tool.name}</p>
+                      <p className="text-[11px] md:text-xs text-blue-700 font-medium mt-1 leading-tight">{tool.category}</p>
+                    </div>
                   </div>
-                ))}
+                  ))}
+              </div>
+
+              <div className="mt-8 text-center">
+                <button
+                  type="button"
+                  onClick={() => setShowAllTools(current => !current)}
+                  aria-expanded={showAllTools}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-blue-200 bg-white text-blue-700 font-semibold text-sm hover:bg-blue-50 hover:shadow-md transition-all duration-200"
+                >
+                  {showAllTools ? "Voir moins" : `Voir tous les outils (+${logiciels.length - 12})`}
+                  <ChevronRight size={17} className={`transition-transform ${showAllTools ? '-rotate-90' : 'rotate-90'}`} />
+                </button>
               </div>
             </div>
           </div>
@@ -1279,6 +1412,7 @@ export default function Portfolio() {
                 © {currentYear} Camelia Difi - Portfolio Professionnel
               </p>
               <div className="flex gap-4 md:gap-6 text-xs md:text-sm text-gray-500">
+                <a href="#formation" className="hover:text-blue-600 transition-colors">Formation</a>
                 <a href="#projets" className="hover:text-blue-600 transition-colors">Projets</a>
                 <a href="#competences" className="hover:text-blue-600 transition-colors">Compétences</a>
                 <a href="#contact" className="hover:text-blue-600 transition-colors">Contact</a>
