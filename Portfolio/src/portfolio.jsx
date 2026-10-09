@@ -1045,6 +1045,17 @@ export default function Portfolio() {
                 </a>
 
                 <a
+                  href="https://freelance.camelia-difi.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Découvrir mes services freelance (nouvel onglet)"
+                  className="group px-8 md:px-10 py-4 md:py-5 bg-white/90 backdrop-blur-sm text-blue-700 rounded-2xl hover:shadow-xl hover:scale-105 transition-all duration-300 font-semibold flex items-center justify-center gap-3 border-2 border-blue-200 hover:border-blue-400 text-sm md:text-base focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
+                >
+                  <ExternalLink size={20} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                  <span>Mes services freelance</span>
+                </a>
+
+                <a
                   href="/CV_Camelia_Difi.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
